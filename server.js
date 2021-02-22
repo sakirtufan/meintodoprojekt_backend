@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const routes = require('./routes/index')
 
 // Enviroment Variables
 dotenv.config({
@@ -7,14 +8,15 @@ dotenv.config({
 })
 
 
+
 const app = express();
 
 
 const PORT = process.env.PORT;
 
-app.get('/', (req, res) => {
-  res.send("Hello Todo_App Api")
-})
+
+// Routes Middleware
+app.use('/api', routes)
 
 app.listen(PORT, () => {
   console.log(`App started on ${PORT} : ${process.env.NODE_ENV}`);
