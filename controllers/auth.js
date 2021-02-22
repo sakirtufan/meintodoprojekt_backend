@@ -6,17 +6,24 @@ const register = async (req, res, next) => {
   const email = "ftufan@gmail.com";
   const password = "123456";
 
-  // async await
-  const user = await User.create({
-    name,
-    email,
-    password,
-  });
+  // try catch
+  try {
+    // async await
+    const user = await User.create({
+      name,
+      email,
+      password,
+    });
+  
+    res.status(200).json({
+      success: true,
+      data : user
+    });
+    
+  } catch (error) {
+    return next(error);
+  }
 
-  res.status(200).json({
-    success: true,
-    data : user
-  });
 };
 
 module.exports = {
