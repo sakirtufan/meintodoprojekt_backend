@@ -1,30 +1,24 @@
 const User = require("../models/User");
+const asyncErrorWrapper = require("express-async-handler");
 
-const register = async (req, res, next) => {
+const register = asyncErrorWrapper(async (req, res, next) => {
   // POST DATA
   const name = "Fatih Tufan";
   const email = "ftufan@gmail.com";
   const password = "123456";
 
-  // try catch
-  try {
-    // async await
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
-  
-    res.status(200).json({
-      success: true,
-      data : user
-    });
-    
-  } catch (error) {
-    return next(error);
-  }
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
 
-};
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+  
+});
 
 module.exports = {
   register,
