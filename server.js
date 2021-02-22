@@ -1,11 +1,17 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const routes = require('./routes/index')
+const connectDatabase = require('./helpers/database/connectDatabase')
+
+
 
 // Enviroment Variables
 dotenv.config({
   path : "./config/env/config.env"
 })
+
+// MongoDb Connection
+connectDatabase();
 
 
 
