@@ -1,16 +1,12 @@
-const express = require('express')
+const express = require("express");
+const { getAllTodos } = require("../controllers/todo");
 
 const router = express.Router();
 
 //  /todos
 
-router.get('/', (req, res) => {
-  res.send("Todos Home Page");
-})
+router.get("/", getAllTodos);
 
 
-router.get("/delete", (req, res) => {
-  res.send("Todos Delete Page");
-})
 
 module.exports = router;
