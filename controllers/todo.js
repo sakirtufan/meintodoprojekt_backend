@@ -1,10 +1,32 @@
-const getAllTodos = (req, res, next) => {
+const Todo = require("../models/Todo") 
+const CustomError = require("../helpers/error/CustomError")
+const asyncErrorWrapper = require("express-async-handler")
+
+const getAllTodos = asyncErrorWrapper(async(req, res, next) => {
+  const todos = await Todo.find();
+  return res.status(200).json({
+    success: true,
+    data: todos
+  });
+})
+
+const createTodo = asyncErrorWrapper(async (req, res, next) => {
+  const information = req.body;  
+
+  const todo = await Todo.create({
+    content: information.content,
+    user: req.user.id
+  })
+
   res.status(200).json({
     success: true,
-  });
-}
+    data: todo
+  })
+
+});
 
 
 module.exports = {
-  getAllTodos
+  getAllTodos,
+  createTodo
 }
