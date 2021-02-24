@@ -10,6 +10,15 @@ const getAllTodos = asyncErrorWrapper(async(req, res, next) => {
   });
 })
 
+const getSingleTodo = asyncErrorWrapper(async (req, res, next) => {
+  const { id } = req.params;
+  const todo = await Todo.findById(id);
+  res.status(200).json({
+    success: true,
+    data: todo
+  })
+})
+
 const createTodo = asyncErrorWrapper(async (req, res, next) => {
   const information = req.body;  
 
@@ -28,5 +37,6 @@ const createTodo = asyncErrorWrapper(async (req, res, next) => {
 
 module.exports = {
   getAllTodos,
+  getSingleTodo,
   createTodo
 }
