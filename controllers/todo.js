@@ -34,9 +34,25 @@ const createTodo = asyncErrorWrapper(async (req, res, next) => {
 
 });
 
+const editTodo = asyncErrorWrapper(async (req, res, next) => {
+  const { id } = req.params;
+  const { content } = req.body;
+  let todo = await Todo.findById(id);
+
+  todo.content = content;
+  
+  todo = await todo.save();
+
+  return res.status(200).json({
+    success: true,
+    data: todo
+  })
+})
+
 
 module.exports = {
   getAllTodos,
   getSingleTodo,
-  createTodo
+  createTodo,
+  editTodo,
 }
