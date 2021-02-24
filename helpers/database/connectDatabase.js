@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDatabase = () => {
   mongoose
-    .connect("mongodb://localhost:27017/todoAppDB", {
+    .connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useFindAndModify: false,
       useCreateIndex: true,
