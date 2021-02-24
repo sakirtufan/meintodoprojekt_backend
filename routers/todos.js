@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllTodos, createTodo,getSingleTodo,editTodo } = require("../controllers/todo");
+const { getAllTodos, createTodo,getSingleTodo,editTodo,deleteSingleTodo } = require("../controllers/todo");
 const { getAccessToRoute,getTodoOwnerAccess } = require("../middlewares/authorization/auth")
 
 const router = express.Router();
@@ -9,7 +9,8 @@ const router = express.Router();
 router.get("/", getAllTodos);
 router.get("/:id", getSingleTodo);
 router.post("/", getAccessToRoute, createTodo);
-router.put("/:id/edit",[getAccessToRoute,getTodoOwnerAccess],editTodo);
+router.put("/:id/edit", [getAccessToRoute, getTodoOwnerAccess], editTodo);
+router.delete("/:id/delete",[getAccessToRoute, getTodoOwnerAccess],deleteSingleTodo);
 
 
 module.exports = router;

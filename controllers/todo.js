@@ -49,10 +49,21 @@ const editTodo = asyncErrorWrapper(async (req, res, next) => {
   })
 })
 
+const deleteSingleTodo = asyncErrorWrapper(async (req, res, next) => {
+  const { id } = req.params;
+  await Todo.findByIdAndDelete(id);  
+
+  return res.status(200).json({
+    success: true,
+    message: "Todo deleted successfully"
+  })
+})
+
 
 module.exports = {
   getAllTodos,
   getSingleTodo,
   createTodo,
   editTodo,
+  deleteSingleTodo
 }
